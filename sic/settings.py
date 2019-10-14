@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'sic.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'sic',
+        'USER': 'roleSic',
+        'PASSWORD': 'tanganana',
+        'HOST': '80.211.164.55',
+        'PORT': '5432',
     }
 }
 
