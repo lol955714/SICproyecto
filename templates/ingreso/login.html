@@ -1,0 +1,24 @@
+{%extends "base/base.html"%}
+{%block logout%}
+{%endblock logout%}
+{%block contenido%}
+<body id="log">
+	<div id="Contenedor">
+	<h1 class="opcioncontra">Inicio de sesión</h1>
+	<form method="post"> 
+		{% csrf_token %}
+		<div class="opcioncontra">
+			<input type="text" class="form-control" name="user" placeholder="nombre de usuario" id="Correo" aria-describedby="sizing-addon1" required>
+		</div>
+		<div class="opcioncontra">
+			<input  type="password" name="pass" class="form-control" placeholder="******" aria-describedby="sizing-addon1" requir>
+		</div>
+		<div class="opcioncontra">
+			<button type="submit">Entrar</button>
+		</div>
+	</form>	
+</div>	
+</body>
+
+	
+{%endblock contenido%}

@@ -1,0 +1,29 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{%block titulo%}Sistemas Contables 2019{%endblock titulo %}</title>
+	{%block CSS%}
+	<link rel="stylesheet" type="text/css" href="{% static "css/menu.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "css.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "js/scriptA.js" %}">
+	{%endblock CSS%}
+	
+</head>
+<body>
+{%block logout%}
+
+<div id="header">
+			<ul class="nav">
+				<li><a href="{%  url "ingreso:logout"%}">Salir</a></li>
+			</ul>
+		</div>
+{%endblock logout%}
+{%block navegacion%}
+{%endblock navegacion%}
+
+{%block contenido%}
+{%endblock contenido%}
+
+</body>
+</html>
