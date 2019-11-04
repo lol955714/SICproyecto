@@ -1,37 +1,14 @@
 ﻿{%extends "base/base.html"%}
 {%block contenido%}
-	<h4>Seleccione el mes</h4>
-	<select name="categoria" id="inici" form="inicio">
-		<option value="1">Enero</option>
-		<option value="2">Febrero</option>
-		<option value="3">Marzo</option>
-		<option value="4">Abril</option>
-		<option value="5">Mayo</option>
-		<option value="6">Junio</option>
-		<option value="7">Julio</option>
-		<option value="8">Agosto</option>
-		<option value="9">Septiembre</option>
-		<option value="10">Octubre</option>
-		<option value="11">Noviembre</option>
-		<option value="12">Diciembre</option>
-	</select>
+	<form action="{% url "informes:indexinf"%}" method="POST">
+		{% csrf_token %}
+		{{form.as_p}}
+	<button type="submit" value="submit">Obtener informe</button>
+	</form>
+	
 
-	<h4>Final</h4>
-	<select name="categoria2" id="fina" form="final">
-		<option value="1">Enero</option>
-		<option value="2">Febrero</option>
-		<option value="3">Marzo</option>
-		<option value="4">Abril</option>
-		<option value="5">Mayo</option>
-		<option value="6">Junio</option>
-		<option value="7">Julio</option>
-		<option value="8">Agosto</option>
-		<option value="9">Septiembre</option>
-		<option value="10">Octubre</option>
-		<option value="11">Noviembre</option>
-		<option value="12">Diciembre</option>
-	</select>
+	
 
-	<a href="{% url 'estados:balCo' categoria categoria2 %}">Balance Comprobacion</a>
+
 
 {%endblock contenido%}

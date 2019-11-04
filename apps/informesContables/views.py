@@ -1,11 +1,21 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from apps.informesContables.models import *
+from apps.informesContables.forms import *
 
 @login_required
 def indexin(request):
-    return render(request, 'estadosF/indexEstado.html', {})
+    if request.method=='POST':
+        form=eleccion(request.POST)
+        if form.is_valid(): 
+            form_data=form.cleaned_data
+            direccion='/informes/balancecomp/'+str(form_data.get("inicio"))+("/")+str(form_data.get("final"))
+            print(direccion)
+            return HttpResponseRedirect(direccion)
+    else:
+        form=eleccion()
+    return render(request, 'estadosF/indexEstado.html', {'form':form})
 
 @login_required
 def comprobacion(request,ini,fin):
@@ -15,6 +25,7 @@ def comprobacion(request,ini,fin):
     debe = RegistroDebe.objects.all()
     contexto = {'transacciones': transaccion, 'cuentas': cuenta, 'habers': haber, 'debes': debe, }
     return render(request, 'estadosF/balComp.html', contexto)
+
 
 @login_required
 def general(request):
