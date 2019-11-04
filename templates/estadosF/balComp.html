@@ -1,0 +1,86 @@
+﻿{%extends "base/base.html"%}
+{%block contenido%}
+<html>
+
+<link rel="stylesheet" type="text/css" href="/static/css/estiloT.css"/>
+
+ <div class="contenedor">
+            <div id="pestanas">
+
+				<head>
+		<h4 align="center">Balance de comprobacion</h4>
+		<h4 align="center">"Sistemas Contables S.A"</h4>
+		<h4 align="center">del 01 al 31 de Enero 2019</h4>
+	</head>
+
+	<body>
+
+	 <table id="blueTable" class="blueTable table-bordered" border="1" bgcolor="white">
+		<thead>
+		<tr>
+			<td>Cuenta</td>
+			<td>Debe</td>
+			<td>Haber</td>
+		</tr>
+		</thead>
+
+		<tbody>
+		<script>
+			var deb = 0;
+			var hab = 0;
+		</script>
+		{% for cuenta in cuentas %}
+		{% if cuenta.nombre != 'Utilidad' and cuenta.nombre != 'Capital Contable'  %}
+		<tr>
+			<td>{{cuenta.nombre}}</td>
+			{% if cuenta.debe > 0 %}
+			<td>$ {{cuenta.debe}}</td>
+			<td> </td>
+			{% else %}
+			<td> </td>
+			<td>$ {{cuenta.haber}}</td>
+			{% endif %}
+		</tr>
+
+		{% endif %}
+		{% endfor %}
+		<tfoot><tr>
+			<td> </td>
+			<td>$
+				<script>
+				var tot = 0;
+				{% for cuenta in cuentas %}
+				{% if cuenta.nombre != 'Utilidad' and cuenta.nombre != 'Capital Contable' and cuenta.debe > 0 %}
+				tot = tot + {{cuenta.debe}};
+				{% endif %}
+				{% endfor %}
+				document.write(tot);
+				</script>
+			</td>
+			<td>$
+				<script>
+				var tot = 0;
+				{% for cuenta in cuentas %}
+				{% if cuenta.nombre != 'Utilidad' and cuenta.nombre != 'Capital Contable' and cuenta.haber > 0 %}
+				tot = tot + {{cuenta.haber}};
+				{% endif %}
+				{% endfor %}
+				document.write(tot);
+				</script>
+			</td>
+	 </tr></tfoot>
+		</tbody>
+
+	</table>
+
+
+	</body>
+
+
+            </div>
+ </div>
+
+</html>
+
+
+{%endblock contenido%}

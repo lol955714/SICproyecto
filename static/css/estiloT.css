@@ -1,0 +1,107 @@
+body {
+    background: darkgrey;
+}
+
+.contenedor{
+    width: 1200px;
+    margin: auto;
+    background: black;
+    color: white;
+    padding: 20px 15px 50px 50px;
+    border-radius: 10px;
+    box-shadow: 0 10px 10px 0px rgba(0, 0, 0, 0.8);
+}
+
+.contenedor .titulo{
+    font-size: 3.5ex;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+#pestanas {
+    float: top;
+    font-size: 3ex;
+    font-weight: bold;
+}
+
+#pestanas ul{
+    margin-left: 0px;
+}
+
+#pestanas li{
+    list-style-type: none;
+    float: left;
+    text-align: center;
+    margin: 10px 2px -2px -0px;
+    background: darkgrey;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 2px solid bisque;
+    border-bottom: dimgray;
+    padding: 0px 20px 0px 20px;
+}
+
+#pestanas a:link{
+    text-decoration: none;
+    color: DarkBlue;
+}
+
+#contenidopestanas{
+    clear: both;
+    color: Black;
+    background: dimgray;
+    padding: 20px 0px 20px 20px;
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+    border: 2px solid bisque;
+    width: 1200px;
+}
+
+table.blueTable {
+  font-family: "Arial", cursive, sans-serif;
+  border: 2px solid #4F7849;
+  background-color: #EEEEEE;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.blueTable td, table.blueTable th {
+  border: 1px solid #4F7849;
+  padding: 3px 2px;
+}
+table.blueTable tbody td {
+  font-size: 19px;
+  font-weight: bold;
+  color: #4F7849;
+}
+table.blueTable tr:nth-child(even) {
+  background: #CEE0CC;
+}
+table.blueTable tfoot {
+  font-size: 21px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #4F7849;
+  background: -moz-linear-gradient(top, #7b9a76 0%, #60855b 66%, #4F7849 100%);
+  background: -webkit-linear-gradient(top, #7b9a76 0%, #60855b 66%, #4F7849 100%);
+  background: linear-gradient(to bottom, #7b9a76 0%, #60855b 66%, #4F7849 100%);
+  border-top: 1px solid #444444;
+}
+table.blueTable tfoot td {
+  font-size: 21px;
+}
+
+table.blueTable thead {
+  font-size: 21px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #4F7849;
+  background: -moz-linear-gradient(top, #7b9a76 0%, #60855b 66%, #4F7849 100%);
+  background: -webkit-linear-gradient(top, #7b9a76 0%, #60855b 66%, #4F7849 100%);
+  background: linear-gradient(to bottom, #7b9a76 0%, #60855b 66%, #4F7849 100%);
+  border-top: 1px solid #444444;
+}
+table.blueTable thead td {
+  font-size: 21px;
+}

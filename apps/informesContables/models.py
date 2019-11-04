@@ -26,10 +26,13 @@ class Factura(models.Model):
 	def __str__(self):
 		return '%i'&(self.codigo)
 
+class Insumo(models.Model):
+	nombre = models.CharField(max_length=15)
+
 class Producto(models.Model):
 	fkCategoría=models.ForeignKey(Categoría,on_delete=models.CASCADE)
 	codigo=models.CharField(max_length=15)
-	nombre = models.CharField(max_length=15)
+	nombre = models.CharField(max_length=20)
 	existencia=models.IntegerField()
 	def __str__(self):
 		return '%i'&(self.nombre)
@@ -38,35 +41,32 @@ class LineaDeVenta(models.Model):
 	fkFactura=models.ForeignKey(Factura,on_delete=models.CASCADE)
 	fkProducto=models.ForeignKey(Producto,on_delete=models.CASCADE)
 	cantidad=models.IntegerField(default=1)
-	subtotal=models.DecimalField(max_digits=6,decimal_places=2)
+	subtotal=models.DecimalField(max_digits=16,decimal_places=2)
 	def __str__(self):
 		return '%i'&(self.id)
 
 class CategoriaCuentas(models.Model):
-	tipo=models.IntegerField()
-	nombre=models.CharField(max_length=10)
-	def __str__(self):
-		return '%i'&(self.nombre)
+	nombre=models.CharField(max_length=20,default='Activo')
+
 
 ##Opción 1
 class Cuenta(models.Model):
-	nombre=models.CharField(max_length=15)
+	nombre=models.CharField(max_length=30)
 	fkCategoria=models.ForeignKey(CategoriaCuentas,on_delete=models.CASCADE)
-	debe=models.DecimalField(max_digits=6,decimal_places=2)
-	haber=models.DecimalField(max_digits=6,decimal_places=2)
-	def __str__(self):
-		return '%i'&(self.nombre)
+	debe=models.DecimalField(max_digits=15,decimal_places=2,default=0)
+	haber=models.DecimalField(max_digits=15,decimal_places=2,default=0)
+
 
 ##opción 2
 #opté por la segunda opción dado que habrán * registros debe/haber
 class RegistroHaber(models.Model):
 	fkCuenta=models.ForeignKey(Cuenta,on_delete=models.CASCADE)
-	monto=models.DecimalField(max_digits=6,decimal_places=2)
+	monto=models.DecimalField(max_digits=15,decimal_places=2)
 
 
 class RegistroDebe(models.Model):
 	fkCuenta=models.ForeignKey(Cuenta,on_delete=models.CASCADE)
-	monto=models.DecimalField(max_digits=6,decimal_places=2)
+	monto=models.DecimalField(max_digits=15,decimal_places=2)
 
 
 class Transaccion(models.Model):
