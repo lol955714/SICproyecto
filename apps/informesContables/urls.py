@@ -7,8 +7,8 @@ app_name='informes'
 urlpatterns=[
 url(r'^indexInformes/', indexin,name="indexinf"),
 url(r'^balancecomp/(?P<ini>\w+)/(?P<fin>\w+)', comprobacion,name="balCo"),
-url(r'^balancegener/', general,name="balG"),
-url(r'^cambiospatrimonio/', patrimonio,name="CambPa"),
-url(r'^estadresultados/', resultado,name="res"),
+url(r'^balancegener/(?P<ini>\w+)/(?P<fin>\w+)', general,name="balG"),
+url(r'^cambiospatrimonio/(?P<ini>\w+)/(?P<fin>\w+)', patrimonio,name="CambPa"),
+url(r'^estadresultados/(?P<ini>\w+)/(?P<fin>\w+)', resultado,name="res"),
 url(r'^librodiario/', librodia,name="dia"),
 ]
