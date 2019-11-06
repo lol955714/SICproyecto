@@ -28,13 +28,11 @@ def indexin(request):
 
 @login_required
 def comprobacion(request,ini,fin):
-    Vini=ini;
-    Vfin=fin;
     cuenta = Cuenta.objects.all()
     transaccion = Transaccion.objects.all()
     haber = RegistroHaber.objects.all()
     debe = RegistroDebe.objects.all()
-    contexto = {'transacciones': transaccion, 'cuentas': cuenta, 'habers': haber, 'debes': debe,'Vinis':Vini, 'Vfins':Vfin,}
+    contexto = {'transacciones': transaccion, 'cuentas': cuenta, 'habers': haber, 'debes': debe,'Vinis': int(ini), 'Vfins':int(fin),}
     return render(request, 'estadosF/balComp.html', contexto)
 
 

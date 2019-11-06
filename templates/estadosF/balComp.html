@@ -60,7 +60,7 @@
 			var hab = 0;
 
 			{% for transaccion in transacciones %}
-			{% if transaccion.fecha.month != Vinis %}
+			{% if transaccion.fecha.month >= Vinis and transaccion.fecha.month <= Vfins  %}
 
 			{% for debe in debes %}
 
@@ -85,7 +85,7 @@
 			var hab = 0;
 
 			{% for transaccion in transacciones %}
-			{% if transaccion.fecha.month != Vinis %}
+			{% if transaccion.fecha.month >= Vinis and transaccion.fecha.month <= Vfins  %}
 
 			{% for haber in habers %}
 
@@ -113,24 +113,54 @@
 			<td> </td>
 			<td>$
 				<script>
-				var tot = 0;
 				{% for cuenta in cuentas %}
-				{% if cuenta.nombre != 'Utilidad' and cuenta.nombre != 'Capital Contable' and cuenta.debe > 0 %}
-				tot = tot + {{cuenta.debe}};
+
+				{% if cuenta.nombre != 'Utilidad' and cuenta.nombre != 'Capital Contable'  %}
+				var deb = 0;
+				{% for transaccion in transacciones %}
+				{% if transaccion.fecha.month >= Vinis and transaccion.fecha.month <= Vfins  %}
+
+				{% for debe in debes %}
+
+				{% if transaccion.fkRegistroDebe.id == debe.id %}
+				deb=deb+{{debe.monto}};
+
 				{% endif %}
 				{% endfor %}
-				document.write(tot);
+
+				{% endif %}
+				{% endfor %}
+
+
+				{% endif %}
+				{% endfor %}
+				document.write(deb);
 				</script>
 			</td>
 			<td>$
 				<script>
-				var tot = 0;
 				{% for cuenta in cuentas %}
-				{% if cuenta.nombre != 'Utilidad' and cuenta.nombre != 'Capital Contable' and cuenta.haber > 0 %}
-				tot = tot + {{cuenta.haber}};
+
+				{% if cuenta.nombre != 'Utilidad' and cuenta.nombre != 'Capital Contable'  %}
+				var hab = 0;
+				{% for transaccion in transacciones %}
+				{% if transaccion.fecha.month >= Vinis and transaccion.fecha.month <= Vfins  %}
+
+				{% for haber in habers %}
+
+				{% if transaccion.fkRegistroHaber.id == haber.id %}
+				hab=hab+{{haber.monto}};
+
 				{% endif %}
 				{% endfor %}
-				document.write(tot);
+
+				{% endif %}
+				{% endfor %}
+
+
+				{% endif %}
+				{% endfor %}
+				document.write(hab);
 				</script>
 			</td>
 	 </tr></tfoot>
