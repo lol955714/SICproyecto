@@ -19,6 +19,8 @@ def indexin(request):
                 direccion='/informes/cambiospatrimonio/'+str(form_data.get("inicio"))+("/")+str(form_data.get("final"))
             elif informe=='4':
                 direccion='/informes/estadresultados/'+str(form_data.get("inicio"))+("/")+str(form_data.get("final"))
+            elif informe=='5':
+                direccion='/informes/librodiario/'+str(form_data.get("inicio"))+("/")+str(form_data.get("final"))
         return HttpResponseRedirect(direccion)
     else:
         form=eleccion()
@@ -45,8 +47,15 @@ def patrimonio(request,ini,fin):
     return render(request, 'estadosF/estaPatri.html', {})
 
 @login_required
-def librodia(request):
-    return render(request, 'estadosF/libroDiario.html', {})
+def librodia(request,ini,fin):
+    Vini = ini;
+    Vfin = fin;
+    cuenta = Cuenta.objects.all()
+    transaccion = Transaccion.objects.all()
+    haber = RegistroHaber.objects.all()
+    debe = RegistroDebe.objects.all()
+    contexto = {'transacciones': transaccion, 'cuentas': cuenta, 'habers': haber, 'debes': debe, 'Vinis': Vini, 'Vfins': Vfin, }
+    return render(request, 'estadosF/libroDiario.html', contexto)
 
 @login_required
 def resultado(request,ini,fin):

@@ -18,9 +18,10 @@ informes=[
 		(2,'Balance general'),
 		(3,'Cambios en el patrimonio'),
 		(4,'estado de resultados'),
+		(5,'Libro Diario'),
 		]
 
 class eleccion(forms.Form):
-	inicio=forms.ChoiceField(choices=fechas,required=True, label="seleccione el inicio")
-	final=forms.ChoiceField(choices=fechas,required=True,label="ingrese la fecha de finalización")
+	inicio=forms.TypedChoiceField(choices=fechas,coerce=int,required=True, label="seleccione el inicio")
+	final=forms.TypedChoiceField(choices=fechas,coerce=int,required=True,label="ingrese la fecha de finalización")
 	informe=forms.ChoiceField(choices=informes, required=True,label="seleccione el informe a generar")

@@ -1,3 +1,146 @@
-﻿{%block contenido%}
-	Soy un libro diario :D
+﻿{%extends "base/base.html"%}
+{%block contenido%}
+<html>
+
+<link rel="stylesheet" type="text/css" href="/static/css/estiloT.css"/>
+
+ <div class="contenedor">
+            <div id="pestanas">
+
+				<head>
+					<h4 align="center">Libro Diario</h4>
+					<h4 align="center">"Sistemas Contables S.A"</h4>
+					{% if Vinis == '1' %} <h4 align="center">Del 01 de Enero</h4>
+					{% elif Vinis == '2' %} <h4 align="center">Del 01 de Febrero</h4>
+					{% elif Vinis == '3' %} <h4 align="center">Del 01 de Marzo</h4>
+					{% elif Vinis == '4' %} <h4 align="center">Del 01 de Abril</h4>
+					{% elif Vinis == '5' %} <h4 align="center">Del 01 de Mayo</h4>
+					{% elif Vinis == '6' %} <h4 align="center">Del 01 de Junio</h4>
+					{% elif Vinis == '7' %} <h4 align="center">Del 01 de Julio</h4>
+					{% elif Vinis == '8' %} <h4 align="center">Del 01 de Agosto</h4>
+					{% elif Vinis == '9' %} <h4 align="center">Del 01 de Septiembre</h4>
+					{% elif Vinis == '10' %} <h4 align="center">Del 01 de Octubre</h4>
+					{% elif Vinis == '11' %} <h4 align="center">Del 01 de Noviembre</h4>
+					{% else %} <h4 align="center">Del 01 de Diciembre</h4> {% endif %}
+					{% if Vfins == '1' %} <h4 align="center">al 31 de Enero</h4>
+					{% elif Vfins == '2' %} <h4 align="center">al 28 de Febrero</h4>
+					{% elif Vfins == '3' %} <h4 align="center">al 31 de Marzo</h4>
+					{% elif Vfins == '4' %} <h4 align="center">al 30 de Abril</h4>
+					{% elif Vfins == '5' %} <h4 align="center">al 31 de Mayo</h4>
+					{% elif Vfins == '6' %} <h4 align="center">al 30 de Junio</h4>
+					{% elif Vfins == '7' %} <h4 align="center">al 31 de Julio</h4>
+					{% elif Vfins == '8' %} <h4 align="center">al 31 de Agosto</h4>
+					{% elif Vfins == '9' %} <h4 align="center">al 30 de Septiembre</h4>
+					{% elif Vfins == '10' %} <h4 align="center">al 31 de Octubre</h4>
+					{% elif Vfins == '11' %} <h4 align="center">al 30 de Noviembre</h4>
+					{% else %} <h4 align="center">al 31 de Diciembre</h4> {% endif %}
+
+
+	</head>
+
+	<body>
+
+	 <table id="blueTable" class="blueTable table-bordered" border="1" bgcolor="white">
+		<thead>
+		<tr>
+			<td>Cuenta</td>
+			<td>Transacciones</td>
+		</tr>
+		</thead>
+
+		<tbody>
+
+		{% for cuenta in cuentas %}
+		{% if cuenta.nombre != 'Utilidad' and cuenta.nombre != 'Capital Contable'  %}
+		<tr>
+			<td>{{cuenta.nombre}}</td>
+
+			<td>
+				<table id="may" class="greyGridTable">
+					<thead>
+					<tr>
+						<td>Debe</td>
+						<td>Haber</td>
+					</tr>
+					</thead>
+					<tbody>
+								{% for debe in debes %}
+								{% if debe.fkCuenta.id == cuenta.id  %}
+								<tr>
+									<td>
+										{{debe.monto}}
+									</td>
+								</tr>
+								{% endif %}
+								{% endfor %}
+
+								{% for haber in habers %}
+								{% if haber.fkCuenta.id == cuenta.id  %}
+								<tr>
+									<td></td>
+									<td>{{haber.monto}}
+									</td>
+								</tr>
+								{% endif %}
+								{% endfor %}
+
+
+						<tr>
+							<td>TDebe</td>
+							<td>THaber</td>
+						</tr>
+
+					</tbody>
+					<tfoot>
+					<tr>
+						<td>Total: </td>
+						<td>$</td>
+					</tr>
+					</tfoot>
+				</table>
+			</td>
+
+		</tr>
+
+		{% endif %}
+		{% endfor %}
+		<tfoot><tr>
+			<td> </td>
+			<td>$
+				<script>
+				var tot = 0;
+				{% for cuenta in cuentas %}
+				{% if cuenta.nombre != 'Utilidad' and cuenta.nombre != 'Capital Contable' and cuenta.debe > 0 %}
+				tot = tot + {{cuenta.debe}};
+				{% endif %}
+				{% endfor %}
+				document.write(tot);
+				</script>
+			</td>
+			<td>$
+				<script>
+				var tot = 0;
+				{% for cuenta in cuentas %}
+				{% if cuenta.nombre != 'Utilidad' and cuenta.nombre != 'Capital Contable' and cuenta.haber > 0 %}
+				tot = tot + {{cuenta.haber}};
+				{% endif %}
+				{% endfor %}
+				document.write(tot);
+				</script>
+			</td>
+	 </tr></tfoot>
+		</tbody>
+
+	</table>
+
+
+	</body>
+
+
+            </div>
+ </div>
+
+</html>
+
+
 {%endblock contenido%}
