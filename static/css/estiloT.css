@@ -148,3 +148,131 @@ table.greyGridTable tfoot td {
   font-size: 14px;
   background: #A4A4A4;
 }
+
+table.imprimir {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: right;
+  font-size: 12px;
+  width:100%;
+}
+table.imprimir td, table.imprimir th {
+  border: 0px solid #AAAAAA;
+  padding: 1px 4px;
+  font-size: 12px;
+  width:100%;
+}
+table.imprimir tbody td {
+  font-size: 12px;
+   width: 100%;}
+
+
+.boton{
+    background-color: #4F7849;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align:center;
+    text-decoration:none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+    margin-top: 10px;
+    margin-left: 85%;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.boton:hover{
+    background-color: green;
+    color:white;
+}
+
+table.bas {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  width: 100%;
+
+}
+table.bas td, table.bas th {
+  border: 0px solid #AAAAAA;
+  padding: 1px 4px;
+  border-radius: 12px;
+}
+table.bas tbody td {
+  font-size: 20px;}
+
+table.bas tfoot {
+  font-size: 20px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #4F7849;
+  background: -moz-linear-gradient(top, #7b9a76 0%, #60855b 66%, #4F7849 100%);
+  background: -webkit-linear-gradient(top, #7b9a76 0%, #60855b 66%, #4F7849 100%);
+  background: linear-gradient(to bottom, #7b9a76 0%, #60855b 66%, #4F7849 100%);
+  border-top: 1px solid #444444;
+}
+table.bas tfoot td {
+  font-size: 20px;
+}
+
+
+
+
+ table.blueTable2 {
+ margin-top: 0px;
+  align:top;
+  font-family: "Arial", cursive, sans-serif;
+  border: 2px solid #4F7849;
+  background-color: black;
+  width: 90%;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.blueTable2 td, table.blueTable2 th {
+  margin-top: 0px;
+  align:top;
+  border: 1px solid #4F7849;
+  padding: 1px 2px;
+  font-size: 1px;
+}
+table.blueTable2 tbody td {
+  align:top;
+  margin-top: 0px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #4F7849;
+  background: white;
+}
+table.blueTable2 tr:nth-child(even) {
+  margin-top: 0px;
+  align:top;
+  background: white;
+}
+table.blueTable2 tfoot {
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #4F7849;
+  background: -moz-linear-gradient(top, #7b9a76 0%, #60855b 66%, #4F7849 100%);
+  background: -webkit-linear-gradient(top, #7b9a76 0%, #60855b 66%, #4F7849 100%);
+  background: linear-gradient(to bottom, #7b9a76 0%, #60855b 66%, #4F7849 100%);
+  border-top: 1px solid #444444;
+}
+table.blueTable2 tfoot td {
+  font-size: 16px;
+}
+
+table.blueTable2 thead {
+  font-size: 14px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #4F7849;
+  background: -moz-linear-gradient(top, #7b9a76 0%, #60855b 66%, #4F7849 100%);
+  background: -webkit-linear-gradient(top, #7b9a76 0%, #60855b 66%, #4F7849 100%);
+  background: linear-gradient(to bottom, #7b9a76 0%, #60855b 66%, #4F7849 100%);
+  border-top: 1px solid #444444;
+}
+table.blueTable2 thead td {
+  font-size: 16px;
+}

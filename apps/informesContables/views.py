@@ -35,26 +35,42 @@ def comprobacion(request,ini,fin):
     contexto = {'transacciones': transaccion, 'cuentas': cuenta, 'habers': haber, 'debes': debe,'Vinis': int(ini), 'Vfins':int(fin),}
     return render(request, 'estadosF/balComp.html', contexto)
 
+@login_required
+def inicio(request):
+    return render(request, 'estadosF/index.html', {})
 
 @login_required
 def general(request,ini,fin):
-    return render(request, 'estadosF/balGen.html', {})
-
-@login_required
-def patrimonio(request,ini,fin):
-    return render(request, 'estadosF/estaPatri.html', {})
-
-@login_required
-def librodia(request,ini,fin):
-    Vini = ini;
-    Vfin = fin;
     cuenta = Cuenta.objects.all()
     transaccion = Transaccion.objects.all()
     haber = RegistroHaber.objects.all()
     debe = RegistroDebe.objects.all()
-    contexto = {'transacciones': transaccion, 'cuentas': cuenta, 'habers': haber, 'debes': debe, 'Vinis': Vini, 'Vfins': Vfin, }
+    contexto = {'transacciones': transaccion, 'cuentas': cuenta, 'habers': haber, 'debes': debe, 'Vinis': int(ini), 'Vfins': int(fin), }
+    return render(request, 'estadosF/balGen.html', contexto)
+
+@login_required
+def patrimonio(request,ini,fin):
+    cuenta = Cuenta.objects.all()
+    transaccion = Transaccion.objects.all()
+    haber = RegistroHaber.objects.all()
+    debe = RegistroDebe.objects.all()
+    contexto = {'transacciones': transaccion, 'cuentas': cuenta, 'habers': haber, 'debes': debe, 'Vinis': int(ini), 'Vfins': int(fin), }
+    return render(request, 'estadosF/estaPatri.html', contexto)
+
+@login_required
+def librodia(request,ini,fin):
+    cuenta = Cuenta.objects.all()
+    transaccion = Transaccion.objects.all()
+    haber = RegistroHaber.objects.all()
+    debe = RegistroDebe.objects.all()
+    contexto = {'transacciones': transaccion, 'cuentas': cuenta, 'habers': haber, 'debes': debe, 'Vinis': int(ini), 'Vfins': int(fin), }
     return render(request, 'estadosF/libroDiario.html', contexto)
 
 @login_required
 def resultado(request,ini,fin):
-    return render(request, 'estadosF/estaRes.html', {})
+    cuenta = Cuenta.objects.all()
+    transaccion = Transaccion.objects.all()
+    haber = RegistroHaber.objects.all()
+    debe = RegistroDebe.objects.all()
+    contexto = {'transacciones': transaccion, 'cuentas': cuenta, 'habers': haber, 'debes': debe, 'Vinis': int(ini), 'Vfins': int(fin), }
+    return render(request, 'estadosF/estaRes.html', contexto)

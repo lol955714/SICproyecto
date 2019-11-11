@@ -1,3 +1,438 @@
-﻿{%block contenido%}
-	Soy un estado de cambios de patrimonio :D
+﻿{%extends "base/base.html"%}
+{%block contenido%}
+<html>
+
+<link rel="stylesheet" type="text/css" href="/static/css/estiloT.css"/>
+<script type="text/javascript" src="/static/js/imprimir.js"></script>
+
+ <div class="contenedor">
+            <div id="pestanas">
+
+				<head>
+
+					<h4 align="center">Estado de cambios en el patrimonio</h4>
+					<h4 align="center">"Sistemas Contables S.A"</h4>
+
+					{% if Vinis == 1 %} <h4 align="center">Del 01 de Enero</h4>
+					{% elif Vinis == 2 %} <h4 align="center">Del 01 de Febrero</h4>
+					{% elif Vinis == 3 %} <h4 align="center">Del 01 de Marzo</h4>
+					{% elif Vinis == 4 %} <h4 align="center">Del 01 de Abril</h4>
+					{% elif Vinis == 5 %} <h4 align="center">Del 01 de Mayo</h4>
+					{% elif Vinis == 6 %} <h4 align="center">Del 01 de Junio</h4>
+					{% elif Vinis == 7 %} <h4 align="center">Del 01 de Julio</h4>
+					{% elif Vinis == 8 %} <h4 align="center">Del 01 de Agosto</h4>
+					{% elif Vinis == 9 %} <h4 align="center">Del 01 de Septiembre</h4>
+					{% elif Vinis == 10 %} <h4 align="center">Del 01 de Octubre</h4>
+					{% elif Vinis == 11 %} <h4 align="center">Del 01 de Noviembre</h4>
+					{% else %} <h4 align="center">Del 01 de Diciembre</h4> {% endif %}
+					{% if Vfins == 1 %} <h4 align="center">al 31 de Enero</h4>
+					{% elif Vfins == 2 %} <h4 align="center">al 28 de Febrero</h4>
+					{% elif Vfins == 3 %} <h4 align="center">al 31 de Marzo</h4>
+					{% elif Vfins == 4 %} <h4 align="center">al 30 de Abril</h4>
+					{% elif Vfins == 5 %} <h4 align="center">al 31 de Mayo</h4>
+					{% elif Vfins == 6 %} <h4 align="center">al 30 de Junio</h4>
+					{% elif Vfins == 7 %} <h4 align="center">al 31 de Julio</h4>
+					{% elif Vfins == 8 %} <h4 align="center">al 31 de Agosto</h4>
+					{% elif Vfins == 9 %} <h4 align="center">al 30 de Septiembre</h4>
+					{% elif Vfins == 10 %} <h4 align="center">al 31 de Octubre</h4>
+					{% elif Vfins == 11 %} <h4 align="center">al 30 de Noviembre</h4>
+					{% else %} <h4 align="center">al 31 de Diciembre</h4> {% endif %}
+
+
+	</head>
+
+	<body>
+
+	 <table id="blueTable" class="blueTable table-bordered" border="1" bgcolor="white">
+		<thead>
+		<tr>
+			<td>Cuenta</td>
+			<td>Debe</td>
+			<td>Haber</td>
+			<td>Capital Contable</td>
+		</tr>
+		</thead>
+
+		<tbody>
+
+		{% for cuenta in cuentas %}
+		{% if cuenta.fkCategoria.nombre == 'Capital' %}
+		<tr>
+			<td>{{cuenta.nombre}}</td>
+			<td>$ <script>
+			var deb = 0;
+			var hab = 0;
+
+			{% for transaccion in transacciones %}
+			{% if transaccion.fecha.month >= Vinis and transaccion.fecha.month <= Vfins  %}
+
+			{% for debe in debes %}
+
+			{% if debe.fkCuenta.id == cuenta.id and transaccion.fkRegistroDebe.id == debe.id %}
+			deb=deb+{{debe.monto}};
+
+			{% endif %}
+			{% endfor %}
+
+			{% endif %}
+			{% endfor %}
+
+			{% if deb != 0 %}
+			document.write(deb);
+			{% else %}
+			document.write();
+			{% endif %}
+			</script></td>
+
+			<td>$ <script>
+			var deb = 0;
+			var hab = 0;
+
+			{% for transaccion in transacciones %}
+			{% if transaccion.fecha.month >= Vinis and transaccion.fecha.month <= Vfins  %}
+
+			{% for haber in habers %}
+
+			{% if haber.fkCuenta.id == cuenta.id and transaccion.fkRegistroHaber.id == haber.id %}
+			hab=hab+{{haber.monto}};
+
+			{% endif %}
+			{% endfor %}
+
+			{% endif %}
+			{% endfor %}
+
+			{% if hab != 0 %}
+			document.write(hab);
+			{% else %}
+			document.write();
+			{% endif %}
+			</script></td>
+
+		</tr>
+
+		{% endif %}
+		{% endfor %}
+		</tbody>
+
+		<tfoot>
+		<td>Total: </td>
+		<td>
+		<script>
+		var tot = 0;
+		{% for cuenta in cuentas %}
+		{% if cuenta.fkCategoria.nombre == 'Capital' %}
+
+			var deb = 0;
+
+			{% for transaccion in transacciones %}
+			{% if transaccion.fecha.month >= Vinis and transaccion.fecha.month <= Vfins  %}
+
+			{% for debe in debes %}
+			{% if debe.fkCuenta.id == cuenta.id and transaccion.fkRegistroDebe.id == debe.id %}
+			deb=deb+{{debe.monto}};
+			{% endif %}
+			{% endfor %}
+
+			{% endif %}
+			{% endfor %}
+
+
+			tot=tot+deb;
+		{% endif %}
+		{% endfor %}
+				document.write('$' + tot);
+			</script></td>
+		<td>
+		<script>
+		var tot = 0;
+		{% for cuenta in cuentas %}
+		{% if cuenta.fkCategoria.nombre == 'Capital' %}
+
+			var hab = 0;
+
+			{% for transaccion in transacciones %}
+			{% if transaccion.fecha.month >= Vinis and transaccion.fecha.month <= Vfins  %}
+
+			{% for haber in habers %}
+			{% if haber.fkCuenta.id == cuenta.id and transaccion.fkRegistroHaber.id == haber.id %}
+			hab=hab+{{haber.monto}};
+			{% endif %}
+			{% endfor %}
+
+			{% endif %}
+			{% endfor %}
+
+
+			tot=tot+hab;
+		{% endif %}
+		{% endfor %}
+				document.write('$' + tot);
+			</script></td>
+		<td>
+			<script>
+				var tot = 0;
+				var toth = 0;
+				var totd = 0;
+		{% for cuenta in cuentas %}
+		{% if cuenta.fkCategoria.nombre == 'Capital' %}
+
+					var deb = 0;
+					var hab = 0;
+
+			{% for transaccion in transacciones %}
+			{% if transaccion.fecha.month >= Vinis and transaccion.fecha.month <= Vfins  %}
+
+			{% for debe in debes %}
+			{% if debe.fkCuenta.id == cuenta.id and transaccion.fkRegistroDebe.id == debe.id %}
+			deb=deb+{{debe.monto}};
+			{% endif %}
+			{% endfor %}
+
+			{% for haber in habers %}
+			{% if haber.fkCuenta.id == cuenta.id and transaccion.fkRegistroHaber.id == haber.id %}
+			hab=hab+{{haber.monto}};
+			{% endif %}
+			{% endfor %}
+
+			{% endif %}
+			{% endfor %}
+
+
+			totd=totd+deb;
+			toth=toth+hab;
+
+		{% endif %}
+		{% endfor %}
+				tot = toth + totd;
+				document.write('$' + tot);
+			</script>
+		</td>
+		</tfoot>
+
+
+	</table>
+
+
+	</body>
+
+            </div>
+
+	 <div>
+		 <div id="imprimir" class="imprimir" style="display:none">
+
+					<head>
+					<hr>
+					<h4 align="center">Estado de cambios en el patrimonio</h4>
+					<h4 align="center">"Sistemas Contables S.A"</h4>
+						<hr>
+
+					{% if Vinis == 1 %} <h4 align="center">Del 01 de Enero</h4>
+					{% elif Vinis == 2 %} <h4 align="center">Del 01 de Febrero</h4>
+					{% elif Vinis == 3 %} <h4 align="center">Del 01 de Marzo</h4>
+					{% elif Vinis == 4 %} <h4 align="center">Del 01 de Abril</h4>
+					{% elif Vinis == 5 %} <h4 align="center">Del 01 de Mayo</h4>
+					{% elif Vinis == 6 %} <h4 align="center">Del 01 de Junio</h4>
+					{% elif Vinis == 7 %} <h4 align="center">Del 01 de Julio</h4>
+					{% elif Vinis == 8 %} <h4 align="center">Del 01 de Agosto</h4>
+					{% elif Vinis == 9 %} <h4 align="center">Del 01 de Septiembre</h4>
+					{% elif Vinis == 10 %} <h4 align="center">Del 01 de Octubre</h4>
+					{% elif Vinis == 11 %} <h4 align="center">Del 01 de Noviembre</h4>
+					{% else %} <h4 align="center">Del 01 de Diciembre</h4> {% endif %}
+					{% if Vfins == 1 %} <h4 align="center">al 31 de Enero</h4>
+					{% elif Vfins == 2 %} <h4 align="center">al 28 de Febrero</h4>
+					{% elif Vfins == 3 %} <h4 align="center">al 31 de Marzo</h4>
+					{% elif Vfins == 4 %} <h4 align="center">al 30 de Abril</h4>
+					{% elif Vfins == 5 %} <h4 align="center">al 31 de Mayo</h4>
+					{% elif Vfins == 6 %} <h4 align="center">al 30 de Junio</h4>
+					{% elif Vfins == 7 %} <h4 align="center">al 31 de Julio</h4>
+					{% elif Vfins == 8 %} <h4 align="center">al 31 de Agosto</h4>
+					{% elif Vfins == 9 %} <h4 align="center">al 30 de Septiembre</h4>
+					{% elif Vfins == 10 %} <h4 align="center">al 31 de Octubre</h4>
+					{% elif Vfins == 11 %} <h4 align="center">al 30 de Noviembre</h4>
+					{% else %} <h4 align="center">al 31 de Diciembre</h4> {% endif %}
+					<hr>
+
+	</head>
+
+	<body>
+
+	 <table align="center" id="tablaim" class="tablaimp table-bordered" border="0" bgcolor="white" width="100%">
+		<thead>
+		<tr>
+			<td>Cuenta</td>
+			<td>Debe</td>
+			<td>Haber</td>
+			<td>Capital contable</td>
+		</tr>
+		</thead>
+
+		<tbody>
+
+		{% for cuenta in cuentas %}
+		{% if cuenta.fkCategoria.nombre == 'Capital' %}
+		<tr>
+			<td>{{cuenta.nombre}}</td>
+			<td>$ <script>
+			var deb = 0;
+			var hab = 0;
+
+			{% for transaccion in transacciones %}
+			{% if transaccion.fecha.month >= Vinis and transaccion.fecha.month <= Vfins  %}
+
+			{% for debe in debes %}
+
+			{% if debe.fkCuenta.id == cuenta.id and transaccion.fkRegistroDebe.id == debe.id %}
+			deb=deb+{{debe.monto}};
+
+			{% endif %}
+			{% endfor %}
+
+			{% endif %}
+			{% endfor %}
+
+			{% if deb != 0 %}
+			document.write(deb);
+			{% else %}
+			document.write();
+			{% endif %}
+			</script></td>
+
+			<td>$ <script>
+			var deb = 0;
+			var hab = 0;
+
+			{% for transaccion in transacciones %}
+			{% if transaccion.fecha.month >= Vinis and transaccion.fecha.month <= Vfins  %}
+
+			{% for haber in habers %}
+
+			{% if haber.fkCuenta.id == cuenta.id and transaccion.fkRegistroHaber.id == haber.id %}
+			hab=hab+{{haber.monto}};
+
+			{% endif %}
+			{% endfor %}
+
+			{% endif %}
+			{% endfor %}
+
+			{% if hab != 0 %}
+			document.write(hab);
+			{% else %}
+			document.write();
+			{% endif %}
+			</script></td>
+
+		</tr>
+
+		{% endif %}
+		{% endfor %}
+		</tbody>
+
+		<tfoot>
+		<td>Total: </td>
+		<td>
+		<script>
+		var tot = 0;
+		{% for cuenta in cuentas %}
+		{% if cuenta.fkCategoria.nombre == 'Capital' %}
+
+			var deb = 0;
+
+			{% for transaccion in transacciones %}
+			{% if transaccion.fecha.month >= Vinis and transaccion.fecha.month <= Vfins  %}
+
+			{% for debe in debes %}
+			{% if debe.fkCuenta.id == cuenta.id and transaccion.fkRegistroDebe.id == debe.id %}
+			deb=deb+{{debe.monto}};
+			{% endif %}
+			{% endfor %}
+
+			{% endif %}
+			{% endfor %}
+
+
+			tot=tot+deb;
+		{% endif %}
+		{% endfor %}
+				document.write('$' + tot);
+			</script></td>
+		<td>
+		<script>
+		var tot = 0;
+		{% for cuenta in cuentas %}
+		{% if cuenta.fkCategoria.nombre == 'Capital' %}
+
+			var hab = 0;
+
+			{% for transaccion in transacciones %}
+			{% if transaccion.fecha.month >= Vinis and transaccion.fecha.month <= Vfins  %}
+
+			{% for haber in habers %}
+			{% if haber.fkCuenta.id == cuenta.id and transaccion.fkRegistroHaber.id == haber.id %}
+			hab=hab+{{haber.monto}};
+			{% endif %}
+			{% endfor %}
+
+			{% endif %}
+			{% endfor %}
+
+
+			tot=tot+hab;
+		{% endif %}
+		{% endfor %}
+				document.write('$' + tot);
+			</script></td>
+		<td>
+			<script>
+				var tot = 0;
+				var toth = 0;
+				var totd = 0;
+		{% for cuenta in cuentas %}
+		{% if cuenta.fkCategoria.nombre == 'Capital' %}
+
+					var deb = 0;
+					var hab = 0;
+
+			{% for transaccion in transacciones %}
+			{% if transaccion.fecha.month >= Vinis and transaccion.fecha.month <= Vfins  %}
+
+			{% for debe in debes %}
+			{% if debe.fkCuenta.id == cuenta.id and transaccion.fkRegistroDebe.id == debe.id %}
+			deb=deb+{{debe.monto}};
+			{% endif %}
+			{% endfor %}
+
+			{% for haber in habers %}
+			{% if haber.fkCuenta.id == cuenta.id and transaccion.fkRegistroHaber.id == haber.id %}
+			hab=hab+{{haber.monto}};
+			{% endif %}
+			{% endfor %}
+
+			{% endif %}
+			{% endfor %}
+
+
+			totd=totd+deb;
+			toth=toth+hab;
+
+		{% endif %}
+		{% endfor %}
+				tot = toth - totd;
+				document.write('$' + tot);
+			</script>
+		</td>
+		</tfoot>
+	</table>
+<hr>
+	</body>
+
+</div>
+	 <input class="boton" id="button" type="button" onclick="printDiv('imprimir')" value="Imprimir Informe" />
+	 </div>
+ </div>
+
+
+
+</html>
 {%endblock contenido%}

@@ -1,10 +1,25 @@
 ﻿{%extends "base/base.html"%}
 {%block contenido%}
-	<form action="{% url "informes:indexinf"%}" method="POST">
+
+<html>
+
+<link rel="stylesheet" type="text/css" href="/static/css/estiloT.css"/>
+<script type="text/javascript" src="/static/js/imprimir.js"></script>
+
+ <div class="contenedor">
+	<div id="pestanas">
+
+		<form action="{% url "informes:indexinf"%}" method="POST">
 		{% csrf_token %}
 		{{form.as_p}}
-	<button type="submit" value="submit">Obtener informe</button>
+	<button type="submit" value="submit" class="boton">Obtener informe</button>
 	</form>
 
+	</div>
+
+ </div>
+
+
+</html>
 
 {%endblock contenido%}

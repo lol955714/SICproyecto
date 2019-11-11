@@ -5,6 +5,7 @@ from apps.informesContables.views import *
 from django.contrib.auth.views import LogoutView
 app_name='informes'
 urlpatterns=[
+url(r'^principal/', inicio,name="indexp"),
 url(r'^indexInformes/', indexin,name="indexinf"),
 url(r'^balancecomp/(?P<ini>\w+)/(?P<fin>\w+)', comprobacion,name="balCo"),
 url(r'^balancegener/(?P<ini>\w+)/(?P<fin>\w+)', general,name="balG"),
