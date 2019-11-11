@@ -9,11 +9,22 @@
  <div class="contenedor">
 	<div id="pestanas">
 
-		<form action="{% url "informes:indexinf"%}" method="POST">
-		{% csrf_token %}
-		{{form.as_p}}
-	<button type="submit" value="submit" class="boton">Obtener informe</button>
-	</form>
+		<table class="bas">
+			<tr>
+				<td>
+					<p>¡Bienvenido!</p>
+					<p>Seleccione las opciones deseadas en el siguiente formulario</p>
+				</td>
+				<td>
+					<form class="formu" action="{% url "informes:indexinf"%}" method="POST">
+					{% csrf_token %}
+					{{form.as_p}}
+					<button type="submit" value="submit" class="boton">Obtener informe</button>
+					</form>
+				</td>
+			</tr>
+		</table>
+
 
 	</div>
 

@@ -276,3 +276,24 @@ table.blueTable2 thead {
 table.blueTable2 thead td {
   font-size: 16px;
 }
+
+
+form.formu {
+  position: relative;
+  border-top: 300px;
+  width  : 740px;
+  height : 200px;
+  margin : 100px 10px 10px 100px;
+  align:center;
+  background: black;
+}
+
+.select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
