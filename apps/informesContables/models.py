@@ -14,7 +14,7 @@ class Categoría(models.Model):
 	codigo=models.CharField(max_length=10)
 	nombre=models.CharField(max_length=10)
 	def __str__(self):
-		return '%i'&(self.nombre)
+		return '{}'.format(self.nombre)
 
 class Factura(models.Model):
 	fkEmpresa=models.ForeignKey(Empresa,on_delete=models.CASCADE)
@@ -47,14 +47,18 @@ class LineaDeVenta(models.Model):
 
 class CategoriaCuentas(models.Model):
 	nombre=models.CharField(max_length=20,default='Activo')
-
+	def __str__(self):
+		return '{}'.format(self.nombre)
 
 ##Opción 1
 class Cuenta(models.Model):
+	idCuenta=models.IntegerField()
 	nombre=models.CharField(max_length=30)
 	fkCategoria=models.ForeignKey(CategoriaCuentas,on_delete=models.CASCADE)
 	debe=models.DecimalField(max_digits=15,decimal_places=2,default=0)
 	haber=models.DecimalField(max_digits=15,decimal_places=2,default=0)
+	def __str__(self):
+		return '{}'.format(self.nombre)
 
 
 ##opción 2

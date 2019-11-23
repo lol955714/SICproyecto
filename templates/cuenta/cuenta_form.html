@@ -1,0 +1,53 @@
+{%extends "base/base.html"%}
+
+
+{% block contenido %}
+
+
+
+<div>
+	
+	<link rel="stylesheet" type="text/css" href="/static/css/cuenta.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/cuenta-theme.min">
+	
+	
+	<form method="post" class="form-horizontal" >
+	{% csrf_token %} 
+	<div class="form-group">
+    <label for="{{form.idCuenta.name}}" class="col-sm-2 control-label">{{form.idCuenta.label}}</label>
+   		 <div class="col-xs-3">
+      		{{form.idCuenta}}
+    	</div>
+  	</div>
+
+  	<div class="form-group">
+    <label for="{{form.nombre.name}}" class="col-sm-2 control-label">{{form.nombre.label}}</label>
+   		 <div class="col-xs-3">
+      		{{form.nombre}}
+    	</div>
+  	</div>
+
+  	<div class="form-group">
+    <label for="{{form.fkCategoria.name}}" class="col-sm-2 control-label">{{form.fkCategoria.label}}</label>
+   		 <div class="col-xs-3">
+      		{{form.fkCategoria}}
+    	</div>
+  	</div>
+
+  	<div class="form-group">
+    	<div class="col-sm-offset-2 col-sm-10">
+     	 <button type="submit" class="btn btn-info">Guardar</button>
+    	</div>
+  	</div>
+	
+
+	</form>
+</div>
+
+<script  type="text/javascript" src="/static/js/cuenta.min.js">
+</script>
+<script  type="text/javascript" src="/static/js/jquery.min.js">
+</script>
+
+
+{% endblock %}

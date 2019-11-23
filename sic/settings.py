@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'apps.ingreso',
     'apps.informesContables',
     'apps.registroCuentas',
+    'apps.inventario',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,14 @@
+
+
+{% block contentido %}
+<link rel="stylesheet" type="text/css" href="/static/css/cuenta.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/cuenta-theme.min">
+<form method="post"> 
+
+{% csrf_token %}
+<h1> ¿Desea eliminar el registro de {{ producto.nombre }}?</h1>
+
+<button class="btn btn-danger" type="submit">si, eliminar</button>
+<a class ="btn btn-info" href="{% url 'inventario_listar'%}">Cancelar</a>
+</form>
+{% endblock contentido%}

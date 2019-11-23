@@ -1,0 +1,45 @@
+{%extends "base/base.html"%}
+{% block contenido %}
+
+	<link rel="stylesheet" type="text/css" href="/static/css/cuenta.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/cuenta-theme.min">
+	<table style="width:80%; margin-left:90px " class="table table-hover">
+		<thead>
+			<tr>
+				<td>id</td>
+				<td>Nombre</td>
+				<td>Tipo de cuenta</td>
+				
+				
+				
+			</tr>
+			
+		</thead>
+		<tbody>
+		{% if listcuenta %}
+			{% for i in listcuenta %}
+		
+		<tr>
+			<td>{{ i.idCuenta }}</td>
+			<td>{{ i.nombre }}</td>
+			<td>{{ i.fkCategoria.nombre }}</td>
+			
+			
+			<td>
+				<a class="btn btn-primary" href="{% url 'cuenta_editar' i.id %}">Editar</a>
+				<a class="btn btn-danger" href="{% url 'cuenta_eliminar' i.id %}">Eliminar</a>	
+			</td>
+			
+		</tr>	
+			{% endfor %}
+		{% else %}
+		No hay cuentas registradas
+		{% endif %}	
+		</tbody>
+	</table> 
+<script  type="text/javascript" src="/static/js/cuenta.min.js"></script>
+<script  type="text/javascript" src="/static/js/jquery.min.js"></script>
+
+{% endblock %}
+
+	
