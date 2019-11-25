@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from apps.registroCuentas.forms import CuentaForm
+from apps.registroCuentas.forms import CuentaForm, guardarTransaccion
 from apps.informesContables.models import Cuenta, Transaccion, RegistroDebe, RegistroHaber
 from django.urls import reverse_lazy
 
@@ -40,3 +40,65 @@ def cuenta_delete(request, id_cuenta):
 		cuenta.delete()
 		return redirect('cuenta_listar')
 	return render(request, 'cuenta/cuenta_delete.html', {'cuenta':cuenta})
+
+
+def transaccion_list(request):
+	listaTran = Transaccion.objects.all().order_by('id')
+	contexto = {'listaTran':listaTran} 
+	return render(request, 'transaccion/transaccion_list.html', contexto)
+
+def transaccion_delete(request, id):
+	transaccion = Transaccion.objects.get(id=id)
+	if request.method == 'POST':
+		transaccion.delete()
+		return redirect('transaccion_listar')
+	return render(request, 'transaccion/transaccion_delete.html', {'transaccion':transaccion})
+
+
+def crearTransaccion(request):
+	if request.method=='POST':
+		form=guardarTransaccion(request.POST)
+		if form.is_valid():
+			form_data=form.cleaned_data
+			var1=form_data.get("fkRegistroHaber").get()
+			var2=form_data.get("fkRegistroDebe").get()
+			var3=form_data.get("monto")  
+			transaccion=Transaccion()
+			
+			tabladebe=RegistroDebe()
+			tabladebe.fkCuenta=var2
+			tabladebe.monto=var3
+			tabladebe.save()
+			
+			
+			tablahaber=RegistroHaber()
+			tablahaber.fkCuenta=var1
+			tablahaber.monto=var3
+			tablahaber.save()
+
+			transaccion.fkRegistroDebe=tabladebe
+			transaccion.fkRegistroHaber=tablahaber			
+
+			transaccion.save()
+			return redirect('transaccion_listar')
+
+	else: 
+		form=guardarTransaccion()
+		contexto = {'form':form}
+	return render(request, 'transaccion/crear_transaccion.html', contexto)
+
+
+
+def editTransaccion(request, id):
+	transaccion = Transaccion.objects.get(id=id)
+
+	if request.method=='GET':
+		form=guardarTransaccion(instance=transaccion)
+
+	else: 
+		form=guardarTransaccion(request.POST, instance=transaccion)
+		if form.is_valid():
+
+			form.save()
+			return redirect('transaccion_listar')
+	return render(request, 'transaccion/crear_transaccion.html', {'form':form})

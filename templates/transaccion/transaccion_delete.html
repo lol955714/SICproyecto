@@ -1,0 +1,18 @@
+
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/css/cuenta.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/cuenta-theme.min">
+<form method="post"> 
+
+{% csrf_token %}
+<h1> ¿Desea eliminar la transaccion de {{ transaccion.id }}?</h1>
+
+<button class="btn btn-danger" type="submit">si, eliminar</button>
+<a class ="btn btn-info" href="{% url 'transaccion_listar'%}">Cancelar</a>
+</form>
+<script  type="text/javascript" src="/static/js/cuenta.min.js">
+</script>
+<script  type="text/javascript" src="/static/js/jquery.min.js">
+</script>
+{% endblock %}

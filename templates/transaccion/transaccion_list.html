@@ -1,0 +1,48 @@
+{%extends "base/base.html"%}
+
+{% block contenido %}
+	<link rel="stylesheet" type="text/css" href="/static/css/cuenta.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/cuenta-theme.min">
+
+	<table style="width:80%; margin-left:90px " class="table table-hover">
+		<thead>
+			<tr>
+				<td>id</td>
+				<td>Cuenta a cargar</td>
+				<td>Debe</td>
+				<td>Cuenta a abonar</td>
+				<td>Haber</td>
+				<td>Fecha</td>
+								
+				
+			</tr>
+			
+		</thead>
+		<tbody>
+		{% if listaTran %}
+			{% for i in listaTran %}
+		
+		<tr>
+			<td>{{ i.id }}</td>
+			<td>{{ i.fkRegistroDebe.fkCuenta.nombre }}</td>
+			<td>{{ i.fkRegistroDebe.monto }}</td>
+			<td>{{ i.fkRegistroHaber.fkCuenta.nombre }}</td>
+			<td>{{ i.fkRegistroHaber.monto }}</td>
+			<td>{{ i.fecha }}</td>
+			
+			
+			<td>
+				<a class="btn btn-primary" href="">Editar</a>
+				<a class="btn btn-danger" href="{% url 'transaccion_eliminar' i.id %}">Eliminar</a>	
+			</td>
+			
+		</tr>	
+			{% endfor %}
+		{% else %}
+		No hay transacciones registradas
+		{% endif %}	
+		</tbody>
+	</table> 
+	<script  type="text/javascript" src="/static/js/cuenta.min.js"></script>
+	<script  type="text/javascript" src="/static/js/jquery.min.js"></script>
+{% endblock %}
