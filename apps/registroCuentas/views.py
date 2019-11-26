@@ -7,6 +7,12 @@ from apps.informesContables.models import Cuenta, Transaccion, RegistroDebe, Reg
 from django.urls import reverse_lazy
 
 
+def index(request):
+	return render(request,'cuenta/index.html')
+
+def indext(request):
+	return render(request,'transaccion/index.html')
+
 def cuenta_view(request):
 	if request.method == 'POST':
 		form = CuentaForm(request.POST)

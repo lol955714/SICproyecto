@@ -1,7 +1,27 @@
-{% extends 'base/base.html' %}
 
 
 
 {%block contentido %}
-<h1>Contenido de la aplicacion cuenta</h1>
-{% endblock contentido%}
+
+
+<div class="contenedor">
+	<link rel="stylesheet" type="text/css" href="/static/css/cuenta.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/cuenta-theme.min">
+	<div align="center">
+		<h1>Gestionar Cuentas</h1>
+		<div>
+		<p><a class="btn btn-primary" href="{% url 'cuenta_crear' %}">Crear cuenta</a></p>
+		</div>
+		<div>
+		<p><a class="btn btn-success" href="{% url 'cuenta_listar' %}">Ver cuentas</a></p>
+		</div>
+	</div>
+</div>
+
+
+
+<script  type="text/javascript" src="/static/js/cuenta.min.js"></script>
+<script  type="text/javascript" src="/static/js/jquery.min.js"></script>
+
+{% endblock %}
+

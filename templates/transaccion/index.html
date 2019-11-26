@@ -1,18 +1,17 @@
-{%extends "base/base.html"%}
 
-{% block contenido %}
+
+{%block contentido %}
 <link rel="stylesheet" type="text/css" href="/static/css/cuenta.min.css">
 <link rel="stylesheet" type="text/css" href="/static/css/cuenta-theme.min">
-
-<h1 align="center">Crear Transacción</h1>
-<form style="width:90%; margin-left:500px " action="/cuenta/nuevaTransaccion" method="POST">
-	{% csrf_token %}
-
-	{{ form.as_p}}
-
-
-	<button class="btn btn-info" type="submit" >Guardar</button>
-</form>
+<div align="center">
+	<h1>Gestionar Transacciones</h1>
+	<div>
+	<p><a class="btn btn-primary" href="{% url 'transaccion_crear' %}">Crear transacción</a></p>
+	</div>
+	<div>
+	<p><a class="btn btn-success" href="{% url 'transaccion_listar' %}">Ver transacciones</a></p>
+	</div>
+</div>
 <script  type="text/javascript" src="/static/js/cuenta.min.js"></script>
 <script  type="text/javascript" src="/static/js/jquery.min.js"></script>
 {% endblock %}

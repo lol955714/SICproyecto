@@ -16,8 +16,8 @@
 <div id="header">
 			<ul class="nav">
 				<li><a href="{%  url "informes:indexinf"%}">Inicio</a></li>
-				<li><a href="{%  url "informes:indexp"%}">Gestionar Cuentas</a></li>
-				<li><a href="{%  url "informes:indexp"%}">Gestionar Transacciones</a></li>
+				<li><a href="{% url 'index_principal' %}">Gestionar Cuentas</a></li>
+				<li><a href="{%  url 'index_transaccion'%}">Gestionar Transacciones</a></li>
 				<li><a href="{%  url "ingreso:logout"%}">Salir</a></li>
 			</ul>
 		</div>
