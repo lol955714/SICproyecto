@@ -1,17 +1,28 @@
+{%extends "base/base.html"%}
+{% block contenido %}
 
-
-{%block contentido %}
-<link rel="stylesheet" type="text/css" href="/static/css/cuenta.min.css">
-<link rel="stylesheet" type="text/css" href="/static/css/cuenta-theme.min">
-<div align="center">
-	<h1>Gestionar Transacciones</h1>
-	<div>
-	<p><a class="btn btn-primary" href="{% url 'transaccion_crear' %}">Crear transacción</a></p>
-	</div>
-	<div>
-	<p><a class="btn btn-success" href="{% url 'transaccion_listar' %}">Ver transacciones</a></p>
-	</div>
-</div>
+	<link rel="stylesheet" type="text/css" href="/static/css/cuenta.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/cuenta-theme.min">
+	<table style="width:80%; margin-left:90px " class="table table-hover">
+		<thead>
+		</thead>
+		<tbody>
+		<div class="contenedor">
+			<link rel="stylesheet" type="text/css" href="/static/css/cuenta.min.css">
+			<link rel="stylesheet" type="text/css" href="/static/css/cuenta-theme.min">
+			<div align="center">
+				<h1>Gestionar Transacción</h1>
+				<div>
+				<p><a class="btn btn-primary" href="{% url 'transaccion_crear' %}">Agregar Transacción</a></p>
+				</div>
+				<div>
+				<p><a class="btn btn-success" href="{% url 'transaccion_listar' %}">Ver Transacciones</a></p>
+				</div>
+			</div>
+		</div>
+		</tbody>
+	</table> 
 <script  type="text/javascript" src="/static/js/cuenta.min.js"></script>
 <script  type="text/javascript" src="/static/js/jquery.min.js"></script>
+
 {% endblock %}

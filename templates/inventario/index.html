@@ -1,7 +1,28 @@
-{% extends 'base/base.html' %}
+{%extends "base/base.html"%}
+{% block contenido %}
 
+	<link rel="stylesheet" type="text/css" href="/static/css/cuenta.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/cuenta-theme.min">
+	<table style="width:80%; margin-left:90px " class="table table-hover">
+		<thead>
+		</thead>
+		<tbody>
+		<div class="contenedor">
+			<link rel="stylesheet" type="text/css" href="/static/css/cuenta.min.css">
+			<link rel="stylesheet" type="text/css" href="/static/css/cuenta-theme.min">
+			<div align="center">
+				<h1>Gestionar inventario</h1>
+				<div>
+				<p><a class="btn btn-primary" href="{% url 'inventario_crear' %}">Agregar Producto</a></p>
+				</div>
+				<div>
+				<p><a class="btn btn-success" href="{% url 'inventario_listar' %}">Ver Productos</a></p>
+				</div>
+			</div>
+		</div>
+		</tbody>
+	</table> 
+<script  type="text/javascript" src="/static/js/cuenta.min.js"></script>
+<script  type="text/javascript" src="/static/js/jquery.min.js"></script>
 
-
-{%block contentido %}
-<h1>Contenido de la aplicacion cuenta</h1>
-{% endblock contentido%}
+{% endblock %}

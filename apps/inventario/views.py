@@ -6,6 +6,10 @@ from apps.inventario.forms import InventarioForm
 from apps.informesContables.models import Producto
 from django.urls import reverse_lazy
 
+def index(request):
+	return render(request,'inventario/index.html')
+
+
 def inventario_view(request):
 	if request.method == 'POST':
 		form = InventarioForm(request.POST)
