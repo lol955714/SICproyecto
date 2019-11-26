@@ -55,8 +55,8 @@ class Cuenta(models.Model):
 	idCuenta=models.IntegerField()
 	nombre=models.CharField(max_length=30)
 	fkCategoria=models.ForeignKey(CategoriaCuentas,on_delete=models.CASCADE)
-	debe=models.DecimalField(max_digits=15,decimal_places=2,default=0)
-	haber=models.DecimalField(max_digits=15,decimal_places=2,default=0)
+	debe=models.DecimalField(max_digits=6,decimal_places=2,default=0)
+	haber=models.DecimalField(max_digits=6,decimal_places=2,default=0)
 	def __str__(self):
 		return '{}'.format(self.nombre)
 
@@ -65,12 +65,12 @@ class Cuenta(models.Model):
 #opté por la segunda opción dado que habrán * registros debe/haber
 class RegistroHaber(models.Model):
 	fkCuenta=models.ForeignKey(Cuenta,on_delete=models.CASCADE)
-	monto=models.DecimalField(max_digits=15,decimal_places=2)
+	monto=models.DecimalField(max_digits=6,decimal_places=2)
 
 
 class RegistroDebe(models.Model):
 	fkCuenta=models.ForeignKey(Cuenta,on_delete=models.CASCADE)
-	monto=models.DecimalField(max_digits=15,decimal_places=2)
+	monto=models.DecimalField(max_digits=6,decimal_places=2)
 
 
 class Transaccion(models.Model):
